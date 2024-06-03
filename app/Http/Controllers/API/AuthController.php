@@ -32,32 +32,17 @@ class AuthController extends Controller
             return response()->json([
                 'status' => 0,
                 'msg' => $validator->errors(),
-            ], 400);
+            ], 401);
         }
 
-        try {
-            $user = User::create([
-                'email' => $req->input('email'),
-                'password' => Hash::make($req->input('password')),
-            ]);
+        User::create([
+            'email' => $req->input('email'),
+            'password' => Hash::make($req->input('password')),
+        ]);
 
-            return response()->json([
-                'status' => 1,
-                'msg' => 'Tạo mới user thành công',
-            ], 201);
-
-        } catch (QueryException $e) {
-            if ($e->errorInfo[1] == 1062) {
-                return response()->json([
-                    'status' => 0,
-                    'msg' => 'Email đã tồn tại. Hãy thử lại với email khác!',
-                ], 401);
-            }
-
-            return response()->json([
-                'status' => 0,
-                'msg' => 'Có lỗi xảy ra. Vui lòng thử lại sau!',
-            ], 500);
-        }
+        return response()->json([
+            'status' => 1,
+            'msg' => 'Tạo mới user thành công',
+        ], 201);
     }
 }
