@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePostRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -55,8 +56,8 @@ class AuthController extends Controller
         return $this->respondWithToken($token, $refreshToken);
     }
 
-    public function refresh() {
-        $token = request()->refresh_token;
+    public function refresh(Request $req) {
+        $token = $req->header('Authorization');
         try{
             $data = JWTAuth::getJWTProvider()->decode($token);
             $user = User::find($data['user_id']);
@@ -71,37 +72,37 @@ class AuthController extends Controller
         }
     }
 
-    public function register(Request $req) {
-        $validator = Validator::make($req->all(), [
-            'email' => 'required|email|unique:users,email',
-            'password' => [
-                'required',
-                'string',
-                'min:8',
-                'max:32',
-                'regex:/[a-z]/', 
-                'regex:/[A-Z]/',
-                'regex:/[0-9]/', 
-                'regex:/[@$!%*#?&]/', 
-            ]
-        ], [
-            'email.required' => 'Email là bắt buộc',
-            'email.email' => 'Email không đúng định dạng',
-            'email.unique' => 'Email đã tồn tại. Hãy thử lại với email khác!',
-            'password.required' => 'Mật khẩu là bắt buộc.',
-            'password.string' => 'Mật khẩu phải là chuỗi ký tự.',
-            'password.min' => 'Mật khẩu phải có ít nhất :min ký tự.',
-            'password.max' => 'Mật khẩu không được vượt quá :max ký tự.',
-            'password.regex' => 'Mật khẩu phải bao gồm ít nhất một chữ cái thường, một chữ cái hoa, một chữ số và một ký tự đặc biệt.'
-        ]);
+    public function register(StorePostRequest $req) {
+        // $validator = Validator::make($req->all(), [
+        //     'email' => 'required|email|unique:users,email',
+        //     'password' => [
+        //         'required',
+        //         'string',
+        //         'min:8',
+        //         'max:32',
+        //         'regex:/[a-z]/', 
+        //         'regex:/[A-Z]/',
+        //         'regex:/[0-9]/', 
+        //         'regex:/[@$!%*#?&]/', 
+        //     ]
+        // ], [
+        //     'email.required' => 'Email là bắt buộc',
+        //     'email.email' => 'Email không đúng định dạng',
+        //     'email.unique' => 'Email đã tồn tại. Hãy thử lại với email khác!',
+        //     'password.required' => 'Mật khẩu là bắt buộc.',
+        //     'password.string' => 'Mật khẩu phải là chuỗi ký tự.',
+        //     'password.min' => 'Mật khẩu phải có ít nhất :min ký tự.',
+        //     'password.max' => 'Mật khẩu không được vượt quá :max ký tự.',
+        //     'password.regex' => 'Mật khẩu phải bao gồm ít nhất một chữ cái thường, một chữ cái hoa, một chữ số và một ký tự đặc biệt.'
+        // ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 0,
-                'msg' => $validator->errors(),
-            ], 401);
-        }
-
+        // if ($validator->fails()) {
+        //     return response()->json([
+        //         'status' => 0,
+        //         'msg' => $validator->errors(),
+        //     ], 401);
+        // }
+        $validator = $req->validated();
         User::create([
             'email' => $req->email,
             'password' => Hash::make($req->password),
