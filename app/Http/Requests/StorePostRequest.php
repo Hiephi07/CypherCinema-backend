@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StorePostRequest extends FormRequest
 {
@@ -32,7 +34,10 @@ class StorePostRequest extends FormRequest
                 'regex:/[A-Z]/',
                 'regex:/[0-9]/', 
                 'regex:/[@$!%*#?&]/', 
-            ]
+            ],
+            'full_name' => 'required',
+            'phone_number' => 'required',
+            'sex' => 'required'
         ];
     }
 
@@ -46,7 +51,20 @@ class StorePostRequest extends FormRequest
             'password.string' => 'Mật khẩu phải là chuỗi ký tự.',
             'password.min' => 'Mật khẩu phải có ít nhất :min ký tự.',
             'password.max' => 'Mật khẩu không được vượt quá :max ký tự.',
-            'password.regex' => 'Mật khẩu phải bao gồm ít nhất một chữ cái thường, một chữ cái hoa, một chữ số và một ký tự đặc biệt.'
+            'password.regex' => 'Mật khẩu phải bao gồm ít nhất một chữ cái thường, một chữ cái hoa, một chữ số và một ký tự đặc biệt.',
+            'full_name.required' => 'Tên là bắt buộc.',
+            'phone_number.required' => 'Số điện thoại là bắt buộc.',
+            'sex.required' => 'Giới tính là bắt buộc.',
         ];
     }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'status' => false,
+            'data' => null,
+            'msg' => $validator->errors(),
+        ], 401));
+    }
+    
 }
