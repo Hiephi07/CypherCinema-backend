@@ -5,11 +5,11 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\StorePostRequest;
+use App\Models\Token;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -18,41 +18,42 @@ class AuthController extends Controller
 {
     public function login(LoginRequest $req)
     {
-        $validator = $req->validated();
-
-        if (!$token = JWTAuth::attempt($validator)) {
+        if (!$token = JWTAuth::attempt(request(['email', 'password']))) {
             return response()->json([
                 'status' => false,
                 'data' => null,
                 'msg' => 'Thông tin đăng nhập không chính xác. Hãy thử lại'
             ], 401);
         }
-        
         $refreshToken = $this->createRefreshToken();
+        
         return $this->respondWithToken($token, $refreshToken);
     }
 
     public function refresh(Request $req) {
         try {
-            $token = JWTAuth::parseToken()->refresh();
+            $refreshToken = $req->bearerToken();
+            $decode = JWTAuth::getJWTProvider()->decode($refreshToken);
+            if (isset($decode['sub'])) {
+                Token::where('user_id', $decode['sub'])->delete();
+            }
+            $accessToken = JWTAuth::fromUser(auth()->user());
         } catch (JWTException $exception) {
             return response()->json([
                 'status' => false,
                 'msg' => 'Không thể refresh token.'
             ], 401);
         }
-        $refreshToken = $this->createRefreshToken();
-        return $this->respondWithToken($token, $refreshToken);
+        return $this->respondWithToken($accessToken, $refreshToken);
     }
 
     public function register(StorePostRequest $req) {
-        $validator = $req->validated();
         $user = User::create([
-            'email' => $validator['email'],
-            'password' => Hash::make($validator['password']),
-            'full_name' => $validator['full_name'],
-            'phone_number' => $validator['phone_number'],
-            'sex' => $validator['sex'],
+            'email' => $req->email,
+            'password' => Hash::make($req->password),
+            'full_name' => $req->full_name,
+            'phone_number' => $req->phone_number,
+            'sex' => $req->sex,
         ]);
         return response()->json([
             'status' => true,
@@ -65,10 +66,18 @@ class AuthController extends Controller
 
     protected function respondWithToken($token, $refreshToken)
     {
+        Token::create([
+            'token' => $token,
+            'user_id' => auth()->user()->id
+        ]);
+        Token::create([
+            'token' => $refreshToken,
+            'user_id' => auth()->user()->id
+        ]);
         return response()->json([
             'status' => true,
             'data' => [
-                'user' => auth()->user(),
+                'user' => auth()->user()->email,
             ],
             'msg' => 'Đăng nhập thành công',
             'access_token' => $token,
@@ -89,4 +98,19 @@ class AuthController extends Controller
         return $token;
     }
 
+    public function logout(Request $req)
+    {
+        $token = $req->bearerToken();
+        $decode = JWTAuth::getJWTProvider()->decode($token);
+        if (isset($decode['sub'])) {
+            Token::where('user_id', $decode['sub'])->delete();
+        }
+       
+        if($token) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Bạn đã đăng xuất thành công',
+            ]);
+        }
+    }
 }
