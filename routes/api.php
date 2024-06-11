@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
+Route::post('/send-email', [AuthController::class, 'sendEmail']);
+Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 
 Route::middleware(['auth:api', 'auth.refreshtoken'])->group(function() {
     Route::get('/profile', [AuthController::class, 'me']);
