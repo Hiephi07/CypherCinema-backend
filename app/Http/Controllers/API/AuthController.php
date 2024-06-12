@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ForgotPasswordRequest;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\ResetPasswordRequest;
 use App\Http\Requests\StorePostRequest;
 use App\Mail\ResetPasswordMail;
@@ -55,7 +56,7 @@ class AuthController extends Controller
         return $this->respondWithToken($accessToken, $refreshToken);
     }
 
-    public function register(StorePostRequest $req)
+    public function register(RegisterRequest $req)
     {
         $user = User::create([
             'email' => $req->email,
