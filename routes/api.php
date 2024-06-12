@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\MovieController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,3 +26,6 @@ Route::middleware(['auth:api', 'auth.refreshtoken'])->group(function() {
     Route::get('/profile', [AuthController::class, 'me']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
 });
+
+Route::get('/movies', [MovieController::class, 'listMovie']);
+Route::get('/movies/{id}', [MovieController::class, 'detailMovie']);
