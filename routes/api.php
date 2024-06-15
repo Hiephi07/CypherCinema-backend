@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\BannerController;
+use App\Http\Controllers\API\EventController;
 use App\Http\Controllers\API\MovieController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,5 +29,12 @@ Route::middleware(['auth:api', 'auth.refreshtoken'])->group(function() {
     Route::post('/refresh', [AuthController::class, 'refresh']);
 });
 
+// Movie
 Route::get('/movies', [MovieController::class, 'listMovie']);
 Route::get('/movies/{id}', [MovieController::class, 'detailMovie']);
+
+// Banner
+Route::get('/banners', [BannerController::class, 'getBanner']);
+
+// Event
+Route::get('/events', [EventController::class, 'listEvent']);
