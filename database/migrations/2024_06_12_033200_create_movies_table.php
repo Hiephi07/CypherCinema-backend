@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->text('content');
             $table->string('trailer')->nullable();
-            $table->date('premiere');
+            $table->date('premiere')->nullable();
             $table->integer('time');
             $table->foreignIdFor(Category::class)->constrained();
             $table->foreignIdFor(Classify::class)->constrained();

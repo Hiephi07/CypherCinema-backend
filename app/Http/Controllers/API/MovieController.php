@@ -10,9 +10,15 @@ use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
-    public function listMovie() {
+    public function listMovie(Request $req) {
         try {
-            $data = Movie::with('classify', 'language', 'format', 'category')->get();
+            if(!$req->has('premiere')) {
+                $data = Movie::with('classify', 'language', 'format', 'category')->get();
+            } else {
+                $data = ($req->premiere == 'showing') 
+                ? Movie::with('classify', 'language', 'format', 'category')->where('premiere', '<>', null)->get() 
+                : Movie::with('classify', 'language', 'format', 'category')->where('premiere', null)->get();
+            }
             $data->transform(function ($movie) {
                 return [
                     'id' => $movie->id,
