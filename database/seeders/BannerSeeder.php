@@ -14,12 +14,14 @@ class BannerSeeder extends Seeder
     public function run(): void
     {
         Banner::truncate();
-        foreach (['main', 'sub', 'sub'] as $key => $value) {
-            Banner::create([
-                'image' => 'https://bhdstar.vn/wp-content/uploads/2024/03/duoi-13-t-va-duoi-16t.jpg',
-                'status' => ($key % 2 == 0) ? true : false,
-                'type' => $value,
-            ]);
+        foreach (['main', 'sub'] as $key => $value) {
+            for ($i = 0; $i < 4; $i++) {
+                Banner::create([
+                    'image' => 'https://bhdstar.vn/wp-content/uploads/2024/03/duoi-13-t-va-duoi-16t.jpg',
+                    'status' => ($i != 3) ? true : false,
+                    'type' => $value,
+                ]);
+            }
         }
     }
 }

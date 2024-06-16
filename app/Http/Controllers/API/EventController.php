@@ -9,9 +9,10 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    public function listEvent() {
+    public function listEvent(Request $req) {
+        $limit = $req->limit ?: '';
         try {
-            $data = Event::get();
+            $data = Event::limit($limit)->get();
             return response()->json([
                 'status' => true,
                 'data' => $data,
