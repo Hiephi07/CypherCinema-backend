@@ -48,4 +48,8 @@ class Movie extends Model
     public function performers() {
         return $this->belongsToMany(Performer::class, 'performer_movie');
     }
+
+    public function showtimes() {
+        return $this->hasMany(Showtime::class);
+    }
 }

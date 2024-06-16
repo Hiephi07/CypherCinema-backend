@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Movie;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -12,13 +13,30 @@ class MovieController extends Controller
 {
     public function listMovie(Request $req) {
         try {
-            if(!$req->has('premiere')) {
-                $data = Movie::with('classify', 'language', 'format', 'category')->get();
+            $nowDate = Carbon::now()->toDateString();
+            $nowTime = Carbon::now()->toTimeString();
+
+            $filterShowtime = function($query) use ($nowDate, $nowTime) {
+                $query->where('date', '>', $nowDate)
+                    ->orWhere(function($query) use ($nowDate, $nowTime) {
+                        $query->where('date', '=', $nowDate)
+                            ->where('time_start', '>', $nowTime);
+                    });
+            };
+
+            if(!empty($req->state)) {
+                $data = ($req->state == 'showing') 
+                ? Movie::with(['classify', 'language', 'format', 'category', 'showtimes' => $filterShowtime])
+                ->whereHas('showtimes', $filterShowtime)
+
+                : Movie::with('classify', 'language', 'format', 'category', 'showtimes')
+                ->where('premiere', '>', Carbon::now()->toDateTimeString())
+                ->whereDoesntHave('showtimes');
+                
             } else {
-                $data = ($req->premiere == 'showing') 
-                ? Movie::with('classify', 'language', 'format', 'category')->where('premiere', '<>', null)->get() 
-                : Movie::with('classify', 'language', 'format', 'category')->where('premiere', null)->get();
+                $data = Movie::with('classify', 'language', 'format', 'category', 'showtimes');
             }
+            $data = $data->orderBy('premiere')->get();
             $data->transform(function ($movie) {
                 return [
                     'id' => $movie->id,

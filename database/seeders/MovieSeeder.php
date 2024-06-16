@@ -9,6 +9,7 @@ use App\Models\Format;
 use App\Models\Language;
 use App\Models\Movie;
 use App\Models\Performer;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -27,6 +28,7 @@ class MovieSeeder extends Seeder
         Director::truncate();
         Format::truncate();
         Language::truncate();
+        Performer::truncate();
         Movie::truncate();
 
         Classify::factory(5)->create();
@@ -58,7 +60,7 @@ class MovieSeeder extends Seeder
                 'image' => 'https://bhdstar.vn/wp-content/uploads/2024/06/referenceSchemeHeadOfficeallowPlaceHoldertrueheight700ldapp-1.png',
                 'content' => fake()->sentence(50),
                 'trailer' => fake()->url(),
-                'premiere' => ($i % 2 == 0) ? fake()->date() : null,
+                'premiere' => Carbon::now()->subDays(random_int(0, 30))->addDays(random_int(0, 30))->format('Y-m-d'),
                 'time' => fake()->numberBetween(30, 200),
                 'category_id' => random_int(1, 5),  
                 'classify_id' => random_int(1, 5),  
