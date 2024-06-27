@@ -16,7 +16,7 @@ class MovieController extends Controller
             $nowDate = Carbon::now()->toDateString();
             $nowTime = Carbon::now()->toTimeString();
 
-            $filterShowtime = function($query) use ($nowDate, $nowTime) {
+            $filterShowtime = function ($query) use ($nowDate, $nowTime) {
                 $query->where('date', '>', $nowDate)
                     ->orWhere(function($query) use ($nowDate, $nowTime) {
                         $query->where('date', '=', $nowDate)
@@ -56,6 +56,7 @@ class MovieController extends Controller
         } catch (QueryException $exception) {
             return response()->json([
                 'status' => false,
+                'data' => null,
                 'msg' => 'Thất bại'
             ]);
         }
@@ -89,6 +90,7 @@ class MovieController extends Controller
         } catch (Exception $exception) {
             return response()->json([
                 'status' => false,
+                'data' => null,
                 'msg' => 'Thất bại'
             ]);
         }
