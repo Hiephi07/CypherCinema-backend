@@ -10,4 +10,8 @@ class Theater extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'image', 'content'];
+
+    public function rooms() {
+        return $this->hasMany(Room::class);
+    }
 }
