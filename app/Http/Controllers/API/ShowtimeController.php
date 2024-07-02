@@ -34,17 +34,19 @@ class ShowtimeController extends Controller
         $result = $showtimes->groupBy(function ($item) {
             return $item->room->theater->id;
         })
-        ->map(function ($sessions, $cinemaID) {
+        ->map(function ($sessions, $cinemaID) use ($movie) {
             $theater = $sessions->first()->room->theater;
             return [
                 'title' => $theater->name,
                 'address' => $theater->address,
                 'cinemaID' => $cinemaID,
-                'sessions' => $sessions->map(function ($showtime) {
+                'sessions' => $sessions->map(function ($showtime) use ($movie) {
                     return [
                         'showtimeID' => $showtime->id,
                         'time' => $showtime->time_start,
                         'date' => $showtime->date,
+                        'language' => $movie->language->name,
+                        'format' => $movie->format->name
                     ];
                 }),
             ];
