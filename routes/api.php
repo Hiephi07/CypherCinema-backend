@@ -4,6 +4,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\BannerController;
 use App\Http\Controllers\API\EventController;
 use App\Http\Controllers\API\MovieController;
+use App\Http\Controllers\API\SeatController;
 use App\Http\Controllers\API\ShowtimeController;
 use App\Http\Controllers\API\TheaterController;
 use Illuminate\Support\Facades\Route;
@@ -47,3 +48,4 @@ Route::get('/theaters/{id}', [TheaterController::class, 'theaterDetail']);
 
 // Book movie tickets
 Route::get('/book-tickets/movies/{id}/showtimes', [ShowtimeController::class, 'showtimes']);
+Route::get('/book-tickets/movies/{movieID}/showtimes/{showtimeID}', [SeatController::class, 'seats']);

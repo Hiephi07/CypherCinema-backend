@@ -6,14 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Models\Movie;
 use Carbon\Carbon;
 use Exception;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ShowtimeController extends Controller
 {
-    public function showtimes(Request $req)
-{
+    public function showtimes(Request $req) {
     try {
+        $dateString = $req->d;
+        $date = Carbon::createFromFormat('Y-m-d', Carbon::parse($dateString)->format('Y-m-d'));
+
         $nowDate = Carbon::now()->toDateString();
         $nowTime = Carbon::now()->toTimeString();
 
@@ -21,25 +23,22 @@ class ShowtimeController extends Controller
 
         $showtimes = $movie->showtimes()
             ->with(['room.theater'])
-            ->where(function ($query) use ($nowDate, $nowTime) {
-                $query->where('date', '>', $nowDate)
-                      ->orWhere(function ($query) use ($nowDate, $nowTime) {
-                          $query->where('date', '=', $nowDate)
-                                ->where('time_start', '>', $nowTime);
-                      });
+            ->where(function ($query) use ($date, $nowDate, $nowTime) {
+                if ($date->isSameDay($nowDate)) {
+                    $query->where('time_start', '>', $nowTime);
+                }
+                $query->whereDate('date', $date);
             })
-            ->get();
+            ->orderBy('time_start')->get();
 
         $result = $showtimes->groupBy(function ($item) {
             return $item->room->theater->id;
         })
         ->map(function ($sessions, $cinemaID) {
             $theater = $sessions->first()->room->theater;
-            preg_match('/Địa điểm: (.*?)(?:\r\n|$)/s', $theater->content, $matches);
-            $address = isset($matches[1]) ? trim($matches[1]) : null;
             return [
                 'title' => $theater->name,
-                'address' => $address,
+                'address' => $theater->address,
                 'cinemaID' => $cinemaID,
                 'sessions' => $sessions->map(function ($showtime) {
                     return [
