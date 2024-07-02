@@ -64,7 +64,7 @@ class ShowtimeController extends Controller
             'errors' => [
                 'msg' => 'Lấy thông tin suất chiếu phim thất bại'
             ]
-        ]);
+        ], 500);
     }
 }
 }

@@ -17,7 +17,7 @@ class SeatController extends Controller
                 'errors' => [
                     'msg' => 'Lấy danh sách ghế không thành công'
                 ]
-            ]);
+            ], 500);
         }
     }
 }

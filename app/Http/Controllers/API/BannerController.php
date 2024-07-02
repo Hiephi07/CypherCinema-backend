@@ -28,7 +28,7 @@ class BannerController extends Controller
                 'status' => false,
                 'data' => null,
                 'msg' => 'Thất bại'
-            ]);
+            ], 500);
         }
     }
 }

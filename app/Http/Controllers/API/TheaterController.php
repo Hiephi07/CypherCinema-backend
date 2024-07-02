@@ -22,7 +22,7 @@ class TheaterController extends Controller
                 'status' => false,
                 'data' => null,
                 'msg' => 'Thất bại'
-            ]);
+            ], 500);
         }
     }
 
@@ -39,7 +39,7 @@ class TheaterController extends Controller
                 'status' => false,
                 'data' => null,
                 'msg' => 'Thất bại'
-            ]);
+            ], 500);
         }
     }
 }

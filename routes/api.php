@@ -8,6 +8,7 @@ use App\Http\Controllers\API\PaymentMethodController;
 use App\Http\Controllers\API\SeatController;
 use App\Http\Controllers\API\ShowtimeController;
 use App\Http\Controllers\API\TheaterController;
+use App\Http\Controllers\API\VoucherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,3 +53,4 @@ Route::get('/book-tickets/movies/{id}/showtimes', [ShowtimeController::class, 's
 Route::get('/book-tickets/movies/{movieID}/showtimes/{showtimeID}', [SeatController::class, 'seats']);
 
 Route::get('/payment-methods', [PaymentMethodController::class, 'getAll']);
+Route::post('/vouchers', [VoucherController::class, 'applyVoucher']);

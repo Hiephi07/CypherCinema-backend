@@ -58,7 +58,7 @@ class MovieController extends Controller
                 'status' => false,
                 'data' => null,
                 'msg' => 'Thất bại'
-            ]);
+            ], 500);
         }
     }
 
@@ -92,7 +92,7 @@ class MovieController extends Controller
                 'status' => false,
                 'data' => null,
                 'msg' => 'Thất bại'
-            ]);
+            ], 500);
         }
     }
     

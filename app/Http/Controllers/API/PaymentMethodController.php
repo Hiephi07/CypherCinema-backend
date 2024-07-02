@@ -22,7 +22,7 @@ class PaymentMethodController extends Controller
                 'status' => false,
                 'data' => null,
                 'msg' => 'Thất bại'
-            ], 404);
+            ], 500);
         }
     }
 }
