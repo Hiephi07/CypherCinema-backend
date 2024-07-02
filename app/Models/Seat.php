@@ -9,7 +9,7 @@ class Seat extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['row', 'col', 'status', 'seat_type_id', 'room_id'];
+    protected $fillable = ['row', 'col', 'status', 'price', 'seat_type_id', 'room_id'];
 
     public function room() {
         return $this->belongsTo(Room::class);

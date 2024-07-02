@@ -50,7 +50,7 @@ Route::get('/theaters/{id}', [TheaterController::class, 'theaterDetail']);
 
 // Book movie tickets
 Route::get('/book-tickets/movies/{id}/showtimes', [ShowtimeController::class, 'showtimes']);
-Route::get('/book-tickets/movies/{movieID}/showtimes/{showtimeID}', [SeatController::class, 'seats']);
+Route::get('/book-tickets/movies/{movieID}/showtimes/{showtimeID}/seats', [SeatController::class, 'seats']);
 
 Route::get('/payment-methods', [PaymentMethodController::class, 'getAll']);
 Route::post('/vouchers', [VoucherController::class, 'applyVoucher']);

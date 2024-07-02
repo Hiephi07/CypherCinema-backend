@@ -18,4 +18,8 @@ class Room extends Model
     public function theater() {
         return $this->belongsTo(Theater::class);
     }
+
+    public function seats() {
+        return $this->hasMany(Seat::class);
+    }
 }

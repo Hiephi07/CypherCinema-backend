@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('row');
             $table->string('col');
             $table->boolean('status');
+            $table->integer('price');
             $table->foreignIdFor(SeatType::class)->constrained();
             $table->foreignIdFor(Room::class)->constrained();
             $table->timestamps();
