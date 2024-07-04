@@ -2,6 +2,8 @@
 
 namespace App\Services\User;
 
+use App\Events\UserRegistered;
+use App\Mail\VerifyEmail;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +26,8 @@ class UserService
         try {
             $user = $this->userRepository->create($data);
 
-            event(new Registered($user));
+            // event(new Registered($user));
+            event(new UserRegistered($user));
 
             return response()->json([
                 'status' => true,

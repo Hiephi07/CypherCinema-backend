@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\UserController;
@@ -31,7 +30,8 @@ Route::group([
         [
             'api',
             'auth.jwt',
-            'verified.email'
+            'verified.email',
+            'throttle:api', // rate-limiting
         ]
 ], function () {
     Route::post('logout', [UserController::class, 'logout']);
