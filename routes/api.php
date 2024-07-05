@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\API\BannerController;
-use App\Http\Controllers\API\EventController;
+use App\Http\Controllers\API\Banner\BannerController;
+use App\Http\Controllers\API\Event\EventController;
 use App\Http\Controllers\API\MovieController;
 use App\Http\Controllers\API\PaymentMethodController;
 use App\Http\Controllers\API\SeatController;
@@ -53,8 +53,11 @@ Route::middleware(['auth.jwt'])->group(function () {
     ->name('verification.verify');
 });
 
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
 Route::post('/password/forgot', [ForgotPasswordController::class, 'sendResetLinkEmail']);
 Route::post('/password/reset', [ResetPasswordController::class, 'reset']);
+
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -79,7 +82,5 @@ Route::get('/book-tickets/movies/{movieID}/showtimes/{showtimeID}/seats', [SeatC
 Route::get('/payment-methods', [PaymentMethodController::class, 'getAll']);
 Route::post('/vouchers', [VoucherController::class, 'applyVoucher']);
 
-Route::post('register', [AuthController::class, 'register']);
-Route::post('login', [AuthController::class, 'login']);
 
 
