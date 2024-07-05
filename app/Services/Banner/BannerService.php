@@ -2,14 +2,14 @@
 
 namespace App\Services\Banner;
 
-use App\Repositories\Banner\BannerRepository;
+use App\Repositories\Banner\BannerRepositoryInterface;
 use Exception;
 
 class BannerService {
 
     protected $bannerRepository;
 
-    public function __construct(BannerRepository $bannerRepository)
+    public function __construct(BannerRepositoryInterface $bannerRepository)
     {
         $this->bannerRepository = $bannerRepository;
     }

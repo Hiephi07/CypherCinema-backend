@@ -2,14 +2,14 @@
 
 namespace App\Services\Event;
 
-use App\Repositories\Event\EventRepository;
+use App\Repositories\Event\EventRepositoryInterface;
 use Exception;
 
 class EventService {
 
     protected $eventRepository;
 
-    public function __construct(EventRepository $eventRepository)
+    public function __construct(EventRepositoryInterface $eventRepository)
     {
         $this->eventRepository = $eventRepository;
     }
