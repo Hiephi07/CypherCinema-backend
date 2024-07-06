@@ -7,7 +7,7 @@ use App\Http\Controllers\API\MovieController;
 use App\Http\Controllers\API\PaymentMethodController;
 use App\Http\Controllers\API\SeatController;
 use App\Http\Controllers\API\ShowtimeController;
-use App\Http\Controllers\API\TheaterController;
+use App\Http\Controllers\API\Theater\TheaterController;
 use App\Http\Controllers\API\VoucherController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;

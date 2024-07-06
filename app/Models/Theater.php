@@ -14,4 +14,8 @@ class Theater extends Model
     public function rooms() {
         return $this->hasMany(Room::class);
     }
+
+    public function cinemaCity () {
+        return $this->belongsTo(CinemaCity::class);
+    }
 }

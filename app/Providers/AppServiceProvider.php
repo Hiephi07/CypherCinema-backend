@@ -6,6 +6,8 @@ use App\Repositories\Banner\BannerRepository;
 use App\Repositories\Banner\BannerRepositoryInterface;
 use App\Repositories\Event\EventRepository;
 use App\Repositories\Event\EventRepositoryInterface;
+use App\Repositories\Theater\TheaterRepository;
+use App\Repositories\Theater\TheaterRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\User\UserRepository;
 use App\Repositories\User\UserRepositoryInterface;
@@ -20,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(EventRepositoryInterface::class, EventRepository::class);
         $this->app->bind(BannerRepositoryInterface::class, BannerRepository::class);
+        $this->app->bind(TheaterRepositoryInterface::class, TheaterRepository::class);
     }
 
     /**
