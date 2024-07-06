@@ -1,25 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\Voucher;
 
 use App\Http\Controllers\Controller;
 use App\Models\Voucher;
+use App\Services\Voucher\VoucherService;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 
 class VoucherController extends Controller
 {
+    protected $voucherService;
+
+    public function __construct(VoucherService $voucherService)
+    {
+        $this->voucherService = $voucherService;
+    }
+
     public function applyVoucher(Request $req) {
         try {
-            $voucher = Voucher::where('name', $req->code)
-                            ->where('status', 1)         
-                            ->where('quantity', '>', 0)
-                            ->where('expiration_date', '>', Carbon::now()->toDateString())       
-                            ->first();
-            if(!$voucher) {
-                throw new Exception();
-            }
+            $voucher = $this->voucherService->validateVoucher($req->code);
+
             return response()->json([
                 'status' => true,
                 'data' => $voucher->name,

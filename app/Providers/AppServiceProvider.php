@@ -15,6 +15,8 @@ use App\Repositories\Theater\TheaterRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\User\UserRepository;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Repositories\Voucher\VoucherRepository;
+use App\Repositories\Voucher\VoucherRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(TheaterRepositoryInterface::class, TheaterRepository::class);
         $this->app->bind(MovieRepositoryInterface::class, MovieRepository::class);
         $this->app->bind(PaymentMethodRepositoryInterface::class, PaymentMethodRepository::class);
+        $this->app->bind(VoucherRepositoryInterface::class, VoucherRepository::class);
     }
 
     /**

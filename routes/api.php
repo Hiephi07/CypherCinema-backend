@@ -8,7 +8,7 @@ use App\Http\Controllers\API\Paymentmethod\PaymentMethodController;
 use App\Http\Controllers\API\SeatController;
 use App\Http\Controllers\API\ShowtimeController;
 use App\Http\Controllers\API\Theater\TheaterController;
-use App\Http\Controllers\API\VoucherController;
+use App\Http\Controllers\API\Voucher\VoucherController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\Auth\ResetPasswordController;
