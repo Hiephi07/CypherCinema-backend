@@ -10,6 +10,8 @@ use App\Repositories\Movie\MovieRepository;
 use App\Repositories\Movie\MovieRepositoryInterface;
 use App\Repositories\Paymentmethod\PaymentMethodRepository;
 use App\Repositories\Paymentmethod\PaymentMethodRepositoryInterface;
+use App\Repositories\Seat\SeatRepository;
+use App\Repositories\Seat\SeatRepositoryInterface;
 use App\Repositories\Showtime\ShowtimeRepository;
 use App\Repositories\Showtime\ShowtimeRepositoryInterface;
 use App\Repositories\Theater\TheaterRepository;
@@ -35,6 +37,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(PaymentMethodRepositoryInterface::class, PaymentMethodRepository::class);
         $this->app->bind(VoucherRepositoryInterface::class, VoucherRepository::class);
         $this->app->bind(ShowtimeRepositoryInterface::class, ShowtimeRepository::class);
+        $this->app->bind(SeatRepositoryInterface::class, SeatRepository::class);
     }
 
     /**

@@ -5,7 +5,7 @@ use App\Http\Controllers\API\Banner\BannerController;
 use App\Http\Controllers\API\Event\EventController;
 use App\Http\Controllers\API\Movie\MovieController;
 use App\Http\Controllers\API\Paymentmethod\PaymentMethodController;
-use App\Http\Controllers\API\SeatController;
+use App\Http\Controllers\API\Seat\SeatController;
 use App\Http\Controllers\API\Showtime\ShowtimeController;
 use App\Http\Controllers\API\Theater\TheaterController;
 use App\Http\Controllers\API\Voucher\VoucherController;
