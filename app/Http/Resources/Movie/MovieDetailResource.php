@@ -27,7 +27,7 @@ class MovieDetailResource extends JsonResource
             'format' => $this->format ? $this->format->name : null,
             'category' => $this->category ? $this->category->name : null,
             'director' => $this->director ? $this->director->name : null,
-            'performers' => $this->performers->pluck('name')
+            'performers' => $this->performers ? $this->performers->pluck('name') : null
         ];
     }
 }

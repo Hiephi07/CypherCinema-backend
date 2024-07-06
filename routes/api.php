@@ -6,7 +6,7 @@ use App\Http\Controllers\API\Event\EventController;
 use App\Http\Controllers\API\Movie\MovieController;
 use App\Http\Controllers\API\Paymentmethod\PaymentMethodController;
 use App\Http\Controllers\API\SeatController;
-use App\Http\Controllers\API\ShowtimeController;
+use App\Http\Controllers\API\Showtime\ShowtimeController;
 use App\Http\Controllers\API\Theater\TheaterController;
 use App\Http\Controllers\API\Voucher\VoucherController;
 use Illuminate\Support\Facades\Route;
@@ -76,7 +76,7 @@ Route::get('/theaters', [TheaterController::class, 'listTheater']);
 Route::get('/theaters/{id}', [TheaterController::class, 'theaterDetail']);
 
 // Book movie tickets
-Route::get('/book-tickets/movies/{id}/showtimes', [ShowtimeController::class, 'showtimes']);
+Route::get('/book-tickets/movies/{id}/showtimes', [ShowtimeController::class, 'getShowtimes']);
 Route::get('/book-tickets/movies/{movieID}/showtimes/{showtimeID}/seats', [SeatController::class, 'seats']);
 
 Route::get('/payment-methods', [PaymentMethodController::class, 'getAll']);
