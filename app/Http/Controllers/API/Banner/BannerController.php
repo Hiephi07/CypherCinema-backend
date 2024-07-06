@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API\Banner;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Banner\BannerResource;
-use App\Models\Banner;
 use App\Services\Banner\BannerService;
 use Exception;
 use Illuminate\Http\Request;

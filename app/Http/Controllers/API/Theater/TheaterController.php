@@ -5,7 +5,6 @@ namespace App\Http\Controllers\API\Theater;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Theater\TheaterDetailResource;
 use App\Http\Resources\Theater\TheaterResource;
-use App\Models\Theater;
 use App\Services\Theater\TheaterService;
 use Exception;
 use Illuminate\Http\Request;
