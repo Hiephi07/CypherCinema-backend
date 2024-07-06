@@ -3,7 +3,7 @@
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\Banner\BannerController;
 use App\Http\Controllers\API\Event\EventController;
-use App\Http\Controllers\API\MovieController;
+use App\Http\Controllers\API\Movie\MovieController;
 use App\Http\Controllers\API\PaymentMethodController;
 use App\Http\Controllers\API\SeatController;
 use App\Http\Controllers\API\ShowtimeController;

@@ -9,7 +9,7 @@ class Classify extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'desc'];
+    protected $fillable = ['name', 'disc'];
 
     public function movies() {
         return $this->hasMany(Movie::class);

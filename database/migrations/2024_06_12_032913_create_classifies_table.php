@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('classifies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('desc');
+            $table->string('disc');
             $table->timestamps();
         });
     }
