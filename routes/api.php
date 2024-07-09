@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\Auth\ResetPasswordController;
 use App\Http\Controllers\API\Auth\ForgotPasswordController;
+use App\Http\Controllers\API\City\CityController;
 use App\Http\Controllers\API\EmailVerificationController;
 
 /*
@@ -74,6 +75,9 @@ Route::get('/events', [EventController::class, 'listEvent']);
 // Theater
 Route::get('/theaters', [TheaterController::class, 'listTheater']);
 Route::get('/theaters/{id}', [TheaterController::class, 'theaterDetail']);
+
+// City
+Route::get('/cities', [CityController::class, 'listCity']);
 
 // Book movie tickets
 Route::get('/book-tickets/movies/{id}/showtimes', [ShowtimeController::class, 'getShowtimes']);

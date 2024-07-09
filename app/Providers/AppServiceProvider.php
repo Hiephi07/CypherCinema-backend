@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Repositories\Banner\BannerRepository;
 use App\Repositories\Banner\BannerRepositoryInterface;
+use App\Repositories\City\CityRepository;
+use App\Repositories\City\CityRepositoryInterface;
 use App\Repositories\Event\EventRepository;
 use App\Repositories\Event\EventRepositoryInterface;
 use App\Repositories\Movie\MovieRepository;
@@ -38,6 +40,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(VoucherRepositoryInterface::class, VoucherRepository::class);
         $this->app->bind(ShowtimeRepositoryInterface::class, ShowtimeRepository::class);
         $this->app->bind(SeatRepositoryInterface::class, SeatRepository::class);
+        $this->app->bind(CityRepositoryInterface::class, CityRepository::class);
     }
 
     /**
