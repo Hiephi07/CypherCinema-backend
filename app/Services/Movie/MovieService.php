@@ -27,10 +27,15 @@ class MovieService {
                     });
             };
     
-            if (!empty($state)) {
-                return ($state == 'showing') 
-                    ? $this->movieRepository->getShowingMovies($filterShowtime, ['classify', 'language', 'format', 'category'])
-                    : $this->movieRepository->getUpcomingMovies(['classify', 'language', 'format', 'category', 'showtimes']);
+            if ($state) {
+                switch ($state) {
+                    case 'showing':
+                        return $this->movieRepository->getShowingMovies($filterShowtime, ['classify', 'language', 'format', 'category']);
+                    case 'upcoming':
+                        return $this->movieRepository->getUpcomingMovies(['classify', 'language', 'format', 'category', 'showtimes']);
+                    default:
+                        throw new Exception('Sai state: ' . $state);
+                }
             } else {
                 return $this->movieRepository->getAll(['classify', 'language', 'format', 'category', 'showtimes']);
             }

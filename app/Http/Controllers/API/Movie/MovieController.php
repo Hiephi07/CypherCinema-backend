@@ -27,7 +27,7 @@ class MovieController extends Controller
                 'status' => true,
                 'msg' => 'Thành công'
             ]);
-        } catch (QueryException $e) {
+        } catch (Exception $e) {
             return response()->json([
                 'status' => false,
                 'data' => null,
