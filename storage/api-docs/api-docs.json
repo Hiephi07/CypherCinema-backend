@@ -1,0 +1,74 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Documentation",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/voucher": {
+            "get": {
+                "tags": [
+                    "Voucher"
+                ],
+                "summary": "Get list of vouchers",
+                "operationId": "getVoucherList",
+                "responses": {
+                    "200": {
+                        "description": "A list with vouchers"
+                    }
+                }
+            }
+        },
+        "/api/voucher/{id}": {  
+            "get": {
+                "tags": [
+                    "Voucher"
+                ],
+                "summary": "Get a single voucher by ID",
+                "operationId": "getVoucherById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A single voucher",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "discount": {
+                                            "type": "number"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Voucher not found"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Voucher",
+            "description": "Voucher"
+        }
+    ]
+}

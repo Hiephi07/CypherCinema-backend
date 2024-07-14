@@ -14,7 +14,7 @@ use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\Auth\ResetPasswordController;
 use App\Http\Controllers\API\Auth\ForgotPasswordController;
 use App\Http\Controllers\API\City\CityController;
-use App\Http\Controllers\API\EmailVerificationController;
+use App\Http\Controllers\API\Auth\EmailVerificationController;
 
 /*
 |--------------------------------------------------------------------------
