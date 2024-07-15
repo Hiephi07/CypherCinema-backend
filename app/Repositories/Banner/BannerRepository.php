@@ -24,9 +24,12 @@ class BannerRepository implements BannerRepositoryInterface {
     public function getByType($type)
     {
         try {
-            return ($type == 'main') 
-                ? Banner::where([['status', 1], ['type', 'main']])->get()
-                : Banner::where([['status', 1], ['type', 'sub']])->get();
+            if($type == 'main') 
+                return Banner::where([['status', 1], ['type', 'main']])->get();
+            else if($type == 'sub') 
+                return Banner::where([['status', 1], ['type', 'sub']])->get();
+            else 
+                throw new Exception();
         } catch (Exception $e) {
             throw new Exception('Không tìm thấy banner theo type: ' . $e->getMessage());
         }

@@ -36,11 +36,11 @@
                                     "birthday": {
                                         "example": "2000-01-01"
                                     },
-                                    "city": {
+                                    "city_id": {
                                         "example": 30
                                     }
                                 },
-                                "required": ["email", "password", "fullname", "phone_number", "gender", "birthday", "city"]
+                                "required": ["email", "password", "fullname", "phone_number", "gender", "birthday", "city_id"]
                             }
                         }
                     }

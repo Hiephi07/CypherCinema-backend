@@ -18,7 +18,7 @@ class BannerController extends Controller
     }
 
     public function getBanner(Request $req) {
-        $type = $req->input('type', null);
+        $type = $req->query('type', null);
         
         try {
             if(!$type) {
@@ -29,7 +29,7 @@ class BannerController extends Controller
             
             return BannerResource::collection($data)->additional([
                 'status' => true,
-                'msg' => 'Thành công'
+                'msg' => 'Lấy danh sách banner thành công'
             ]);
         } catch (Exception $e) {
             return response()->json([
