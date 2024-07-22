@@ -118,12 +118,14 @@
                                                 {
                                                     "id": 1,
                                                     "image_url": "https://www.bhdstar.vn/wp-content/uploads/2024/07/Banner-Web-BHD_Milk.jpg",
-                                                    "type": "main"
+                                                    "type": "main",
+                                                    "status": true
                                                 },
                                                 {
                                                     "id": 2,
                                                     "image_url": "https://www.bhdstar.vn/wp-content/uploads/2024/07/Banner-Web-BHD_Milk2.jpg",
-                                                    "type": "sub"
+                                                    "type": "sub",
+                                                    "status": true
                                                 }
                                             ]
                                         },
@@ -251,12 +253,14 @@
                                                 {
                                                     "id": 1,
                                                     "image_url": "https://www.bhdstar.vn/wp-content/uploads/2024/07/Banner-Web-BHD_Milk.jpg",
-                                                    "type": "main"
+                                                    "type": "main",
+                                                    "status": true
                                                 },
                                                 {
                                                     "id": 2,
                                                     "image_url": "https://www.bhdstar.vn/wp-content/uploads/2024/07/Banner-Web-BHD_Milk3.jpg",
-                                                    "type": "main"
+                                                    "type": "main",
+                                                    "status": false
                                                 }
                                             ]
                                         },
@@ -272,6 +276,57 @@
             }
         },
         "/api/banners/{id}": {
+            "get": {
+                "tags": [
+                    "Banners"
+                ],
+                "summary": "Get banner by ID",
+                "operationId": "getBannerById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A single banner",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": {
+                                                "id": 1,
+                                                "image_url": "https://www.bhdstar.vn/wp-content/uploads/2024/07/Banner-Web-BHD_Milk.jpg",
+                                                "type": "main",
+                                                "status": true
+                                            }
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Lấy banner thành công!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Voucher not found"
+                    }
+                }
+            },
             "delete": {
                 "tags": [
                     "Banners"
@@ -461,6 +516,787 @@
                         "description": "Voucher not found"
                     }
                 }
+            },
+            "delete": {
+                "tags": [
+                    "Vouchers"
+                ],
+                "summary": "Delete a voucher",
+                "operationId": "deleteVoucher",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "ID của voucher cần xóa"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Voucher đã được xóa thành công.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "type": null,
+                                            "example": null
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Voucher đã được xóa thành công."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Không tìm thấy voucher",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "type": "object",
+                                            "properties": {
+                                                "status": {
+                                                    "type": "boolean",
+                                                    "example": false
+                                                },
+                                                "id": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "Không tìm thấy ID của voucher."
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+
+        "/api/events": {
+            "get": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Get list of events",
+                "operationId": "getEventsList",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "example": [
+                                                {
+                                                    "id": 1,
+                                                    "title": "Khong co tieu de dau",
+                                                    "image": "https://image.com/1",
+                                                    "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                                                    "start_time": "14-07-2024",
+                                                    "start_end": "01-08-2024",
+                                                    "views": 100,
+                                                    "status": true,
+                                                    "date_created": "07-07-2024"
+                                                },
+                                                {
+                                                    "id": 2,
+                                                    "title": "Lan nay co tieu de day",
+                                                    "image": "https://image.com/2",
+                                                    "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                                                    "start_time": "14-07-2024",
+                                                    "start_end": "01-08-2024",
+                                                    "views": 340,
+                                                    "status": false,
+                                                    "date_created": "07-07-2024"
+                                                }
+                                            ]
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Lấy danh sách sự kiện thành công"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Create a new events",
+                "operationId": "createEvent",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Tiêu đề mới"
+                                    },
+                                    "poster": {
+                                        "type": "string",
+                                        "format": "binary",
+                                        "description": "Poster cho bài viết sự kiện"
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "example": "TƯNG BỪNG KHAI TRƯƠNG RẠP CHIẾU PHIM BHD STAR THE GARDEN: RỘN RÀNG CÙNG CHUỖI ƯU ĐÃI SIÊU KHỦNG. Cụm rạp thứ 10 của BHD Star Cineplex sẽ chính thức khai trương vào ngày 21/12/2019 tại Hà Nội với ưu đãi xem phim miễn phí cùng hàng ngàn chương trình khuyến mãi siêu khủng!"
+                                    },
+                                    "start_day": {
+                                        "type": "string",
+                                        "example": "20-07-2024"
+                                    },
+                                    "end_day": {
+                                        "type": "string",
+                                        "example": "31-07-2024"
+                                    }
+                                },
+                                "required": ["title", "poster", "content", "start_day", "end_day"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Voucher created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties":{
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Tiêu đề mới"
+                                                },
+                                                "poster": {
+                                                    "type": "string",
+                                                    "example": "https://image.com/1"
+                                                },
+                                                "content": {
+                                                    "type": "string",
+                                                    "example": "TƯNG BỪNG KHAI TRƯƠNG RẠP CHIẾU PHIM BHD STAR THE GARDEN: RỘN RÀNG CÙNG CHUỖI ƯU ĐÃI SIÊU KHỦNG. Cụm rạp thứ 10 của BHD Star Cineplex sẽ chính thức khai trương vào ngày 21/12/2019 tại Hà Nội với ưu đãi xem phim miễn phí cùng hàng ngàn chương trình khuyến mãi siêu khủng!"
+                                                },
+                                                "start_day": {
+                                                    "type": "string",
+                                                    "example": "20-07-2024"
+                                                },
+                                                "end_day": {
+                                                    "type": "string",
+                                                    "example": "31-07-2024"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dữ liệu đầu vào không hợp lệ.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "type": "object",
+                                            "properties": {
+                                                "title": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "Tiêu đề là bắt  buộc."
+                                                    }
+                                                },
+                                                "poster": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "Poster là bắt buộc."
+                                                    }
+                                                },
+                                                "content": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "Nội dụng là bắt buộc."
+                                                    }
+                                                },
+                                                "start_day": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "Ngày bắt đầu là bắt buộc."
+                                                    }
+                                                },
+                                                "end_day": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "Ngày bắt đầu là bắt buộc."
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/events/{id}": {
+            "get": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Get a single event by ID",
+                "operationId": "getEventById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A single voucher",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "discount": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Voucher not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Edit a event",
+                "operationId": "editEvent",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Tiêu đề mới"
+                                    },
+                                    "poster": {
+                                        "type": "string",
+                                        "format": "binary",
+                                        "description": "Poster cho bài viết sự kiện"
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "example": "TƯNG BỪNG KHAI TRƯƠNG RẠP CHIẾU PHIM BHD STAR THE GARDEN: RỘN RÀNG CÙNG CHUỖI ƯU ĐÃI SIÊU KHỦNG. Cụm rạp thứ 10 của BHD Star Cineplex sẽ chính thức khai trương vào ngày 21/12/2019 tại Hà Nội với ưu đãi xem phim miễn phí cùng hàng ngàn chương trình khuyến mãi siêu khủng!"
+                                    },
+                                    "start_day": {
+                                        "type": "string",
+                                        "example": "20-07-2024"
+                                    },
+                                    "end_day": {
+                                        "type": "string",
+                                        "example": "31-07-2024"
+                                    }
+                                },
+                                "required": ["title", "poster", "content", "start_day", "end_day"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Chỉnh sửa sự kiện thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties":{
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Tiêu đề  sửa"
+                                                },
+                                                "poster": {
+                                                    "type": "string",
+                                                    "example": "https://image.com/1"
+                                                },
+                                                "content": {
+                                                    "type": "string",
+                                                    "example": "TƯNG BỪNG KHAI TRƯƠNG RẠP CHIẾU PHIM BHD STAR THE GARDEN: RỘN RÀNG CÙNG CHUỖI ƯU ĐÃI SIÊU KHỦNG. Cụm rạp thứ 10 của BHD Star Cineplex sẽ chính thức khai trương vào ngày 21/12/2019 tại Hà Nội với ưu đãi xem phim miễn phí cùng hàng ngàn chương trình khuyến mãi siêu khủng!"
+                                                },
+                                                "start_day": {
+                                                    "type": "string",
+                                                    "example": "20-07-2024"
+                                                },
+                                                "end_day": {
+                                                    "type": "string",
+                                                    "example": "31-07-2024"
+                                                },
+                                                "status": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Không tìm thấy sự kiện",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "Không tìm thấy ID của sự kiện."
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Delete a event",
+                "operationId": "deleteEvent",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "ID của event cần xóa"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Event đã được xóa thành công.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "type": null,
+                                            "example": null
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Event đã được xóa thành công."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Không tìm thấy sự kiện",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "Không tìm thấy ID của sự kiện."
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+
+        "/api/movie-is-showing": {
+            "get": {
+                "tags": [
+                    "Movie Is Showing"
+                ],
+                "summary": "Get list of movie is showing",
+                "operationId": "getMovieIsShowingList",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "example": [
+                                                {
+                                                    "id": 1,
+                                                    "nameMovie": "Kẻ trộm mặt trăng 4",
+                                                    "image": "https://image.com/1",
+                                                    "category": "Animation",
+                                                    "classify": {
+                                                        "lable": "T13",
+                                                        "description": "Phim phổ biến đến người xem từ 13 tuổi trở lên"
+                                                    },
+                                                    "format": "2D",
+                                                    "language": "Phụ đề",
+                                                    "director": "",
+                                                    "premiere": "",
+                                                    "trailer": "",
+                                                    "content": ""
+
+                                                },
+                                                {
+                                                    "id": 2,
+                                                    "title": "Tín hiệu vũ trụ",
+                                                    "image": "https://image.com/2",
+                                                    "category": "Action",
+                                                    "classify": {
+                                                        "lable": "T18",
+                                                        "description": "Phim phổ biến đến người xem từ 18 tuổi trở lên"
+                                                    },
+                                                    "format": "2D",
+                                                    "language": "Phụ đề"
+                                                }
+                                            ]
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Lấy danh sách sự kiện thành công"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/a/{id}": {
+            "get": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Get a single event by ID",
+                "operationId": "getEventById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A single voucher",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "discount": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Voucher not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Edit a event",
+                "operationId": "editEvent",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Tiêu đề mới"
+                                    },
+                                    "poster": {
+                                        "type": "string",
+                                        "format": "binary",
+                                        "description": "Poster cho bài viết sự kiện"
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "example": "TƯNG BỪNG KHAI TRƯƠNG RẠP CHIẾU PHIM BHD STAR THE GARDEN: RỘN RÀNG CÙNG CHUỖI ƯU ĐÃI SIÊU KHỦNG. Cụm rạp thứ 10 của BHD Star Cineplex sẽ chính thức khai trương vào ngày 21/12/2019 tại Hà Nội với ưu đãi xem phim miễn phí cùng hàng ngàn chương trình khuyến mãi siêu khủng!"
+                                    },
+                                    "start_day": {
+                                        "type": "string",
+                                        "example": "20-07-2024"
+                                    },
+                                    "end_day": {
+                                        "type": "string",
+                                        "example": "31-07-2024"
+                                    }
+                                },
+                                "required": ["title", "poster", "content", "start_day", "end_day"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Chỉnh sửa sự kiện thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties":{
+                                                "title": {
+                                                    "type": "string",
+                                                    "example": "Tiêu đề  sửa"
+                                                },
+                                                "poster": {
+                                                    "type": "string",
+                                                    "example": "https://image.com/1"
+                                                },
+                                                "content": {
+                                                    "type": "string",
+                                                    "example": "TƯNG BỪNG KHAI TRƯƠNG RẠP CHIẾU PHIM BHD STAR THE GARDEN: RỘN RÀNG CÙNG CHUỖI ƯU ĐÃI SIÊU KHỦNG. Cụm rạp thứ 10 của BHD Star Cineplex sẽ chính thức khai trương vào ngày 21/12/2019 tại Hà Nội với ưu đãi xem phim miễn phí cùng hàng ngàn chương trình khuyến mãi siêu khủng!"
+                                                },
+                                                "start_day": {
+                                                    "type": "string",
+                                                    "example": "20-07-2024"
+                                                },
+                                                "end_day": {
+                                                    "type": "string",
+                                                    "example": "31-07-2024"
+                                                },
+                                                "status": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Không tìm thấy sự kiện",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "Không tìm thấy ID của sự kiện."
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Delete a event",
+                "operationId": "deleteEvent",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "ID của event cần xóa"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Event đã được xóa thành công.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "type": null,
+                                            "example": null
+                                        },
+                                        "msg": {
+                                            "type": "string",
+                                            "example": "Event đã được xóa thành công."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Không tìm thấy sự kiện",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "Không tìm thấy ID của sự kiện."
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     },
@@ -476,6 +1312,14 @@
         {
             "name": "Vouchers",
             "description": "Vouchers"
+        },
+        {
+            "name": "Events",
+            "description": "Events"
+        },
+        {
+            "name": "Movie Is Showing",
+            "description": "Movie is showing"
         }
     ]
 }
