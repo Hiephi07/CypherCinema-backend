@@ -15,7 +15,7 @@ class BannerRepository implements BannerRepositoryInterface {
 
     public function getAll() {
         try {
-            return Banner::where('status', 1)->get();
+            return $this->banner->all();
         } catch (Exception $e) {
             throw new Exception('Lỗi tìm nạp tất cả banner: ' . $e->getMessage());
         }
@@ -24,7 +24,7 @@ class BannerRepository implements BannerRepositoryInterface {
     public function create($data)
     {
         try {
-            return Banner::create($data);
+            return $this->banner->create($data);
         } catch (Exception $e) {
             throw new Exception('Tạo mới không thành công: ' . $e->getMessage());
         }
@@ -34,9 +34,9 @@ class BannerRepository implements BannerRepositoryInterface {
     {
         try {
             if($type == 'main') 
-                return Banner::where([['status', 1], ['type', 'main']])->get();
+                return $this->banner->where([['status', 1], ['type', 'main']])->get();
             else if($type == 'sub') 
-                return Banner::where([['status', 1], ['type', 'sub']])->get();
+                return $this->banner->where([['status', 1], ['type', 'sub']])->get();
             else 
                 throw new Exception();
         } catch (Exception $e) {
@@ -46,7 +46,7 @@ class BannerRepository implements BannerRepositoryInterface {
 
     public function getBannerById($id) {
         try {
-            return Banner::findOrFail($id);
+            return $this->banner->findOrFail($id);
         } catch (Exception $e) {
             throw new Exception('Không tìm thấy banner: ' . $e->getMessage());
         }
@@ -54,7 +54,7 @@ class BannerRepository implements BannerRepositoryInterface {
 
     public function delete($id) {
         try {
-            $banner = Banner::findOrFail($id);
+            $banner = $this->banner->findOrFail($id);
             return $banner->delete();
         } catch (Exception $e) {
             throw new Exception('Không tìm thấy banner: ' . $e->getMessage());
