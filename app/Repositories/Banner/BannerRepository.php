@@ -21,6 +21,15 @@ class BannerRepository implements BannerRepositoryInterface {
         }
     } 
 
+    public function create($data)
+    {
+        try {
+            return Banner::create($data);
+        } catch (Exception $e) {
+            throw new Exception('Tạo mới không thành công: ' . $e->getMessage());
+        }
+    }
+
     public function getByType($type)
     {
         try {
@@ -32,6 +41,23 @@ class BannerRepository implements BannerRepositoryInterface {
                 throw new Exception();
         } catch (Exception $e) {
             throw new Exception('Không tìm thấy banner theo type: ' . $e->getMessage());
+        }
+    }
+
+    public function getBannerById($id) {
+        try {
+            return Banner::findOrFail($id);
+        } catch (Exception $e) {
+            throw new Exception('Không tìm thấy banner: ' . $e->getMessage());
+        }
+    }
+
+    public function delete($id) {
+        try {
+            $banner = Banner::findOrFail($id);
+            return $banner->delete();
+        } catch (Exception $e) {
+            throw new Exception('Không tìm thấy banner: ' . $e->getMessage());
         }
     }
 }

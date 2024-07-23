@@ -68,6 +68,9 @@ Route::get('/movies/{id}', [MovieController::class, 'detailMovie']);
 
 // Banner
 Route::get('/banners', [BannerController::class, 'getBanner']);
+Route::get('/banners/{id}', [BannerController::class, 'detailBanner']);
+Route::post('/banners', [BannerController::class, 'createBanner']);
+Route::delete('/banners/{id}', [BannerController::class, 'deleteBanner']);
 
 // Event
 Route::get('/events', [EventController::class, 'listEvent']);
