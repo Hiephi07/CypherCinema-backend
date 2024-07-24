@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Banner\BannerRequest;
 use App\Http\Resources\Banner\BannerResource;
 use App\Services\Banner\BannerService;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -43,7 +44,16 @@ class BannerController extends Controller
 
     public function createBanner(BannerRequest $req) {
         try {
-            $banner = $this->bannerService->createBanner($req->all());
+            $data = $req->all();
+            $fileName = $this->generateFileName($req->file('image'));
+            $data['image'] = $fileName;
+
+            $banner = $this->bannerService->createBanner($data);
+
+            if($banner) {
+                $req->file('image')->storeAs('public/banners', $banner->image);
+            }
+            
             return (new BannerResource($banner))->additional([
                 'status' => true,
                 'msg' => 'Thêm mới banner thành công'
@@ -88,5 +98,11 @@ class BannerController extends Controller
                 'msg' => $e->getMessage()
             ], 500);
         }
+    }
+
+    private function generateFileName($image)
+    {
+        $date = Carbon::now()->format('Ymd');
+        return $date . '_' . uniqid() . '_' . $image->getClientOriginalName();
     }
 }
