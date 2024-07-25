@@ -1216,9 +1216,13 @@
                                     "phoneNumber": {
                                         "type": "string",
                                         "example": "0987654321234"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "Tầng 8, TTTM Discovery – 302 Cầu Giấy, P.Dịch Vọng, Quận Cầu Giấy, Hà Nội"
                                     }
                                 },
-                                "required": ["theaterName", "city_id", "content", "image", "email", "phoneNumber"]
+                                "required": ["theaterName", "city_id", "content", "image", "email", "phoneNumber", "address"]
                             }
                         }
                     }
@@ -1342,9 +1346,13 @@
                                     "phoneNumber": {
                                         "type": "string",
                                         "example": "0987654321234"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "Tầng 8, TTTM Discovery – 302 Cầu Giấy, P.Dịch Vọng, Quận Cầu Giấy, Hà Nội"
                                     }
                                 },
-                                "required": ["theaterName", "city_id", "content", "image", "email", "phoneNumber"]
+                                "required": ["theaterName", "city_id", "content", "image", "email", "phoneNumber", "address"]
                             }
                         }
                     }
