@@ -57,7 +57,7 @@ class RegisterRequest extends FormRequest
 
             'birthday' =>  'required|date|after:1900-01-01|before:today|date_format:Y-m-d',
 
-            'gender_id' => 'required|numeric|min:-1|max:1',
+            'gender' => 'required|numeric|in:1,2,3',
 
             'city_id' => 'required|numeric|min:1|max:63',
         ];
@@ -93,10 +93,9 @@ class RegisterRequest extends FormRequest
             'birthday.after'       => 'Ngày sinh phải lớn hơn ngày 01/01/1900.',
             'birthday.date_format' => 'Ngày sinh phải theo định dạng năm/tháng/ngày (Ví dụ: 2000-01-01).',
 
-            'gender_id.required' => 'Giới tính không được bỏ trống.',
-            'gender_id.numeric'  => 'Giới tính phải mang giá trị là số.',
-            'gender_id.min'      => 'Giới tính phải mang giá trị từ -1 đến 1',
-            'gender_id.max'      => 'Giới tính phải mang giá trị từ -1 đến 1',
+            'gender.required' => 'Giới tính không được bỏ trống.',
+            'gender.numeric'  => 'Giới tính phải mang giá trị là số.',
+            'gender.in'       => 'Giới tính phải mang giá trị 1, 2 hoặc 3',
 
             'city_id.required' => 'Thành phố không được bỏ trống.',
             'city_id.numeric'  => 'Thành phố phải mang giá trị là số.',

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Banner;
+namespace App\Http\Resources\Voucher;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BannerResource extends JsonResource
+class VoucherResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +16,11 @@ class BannerResource extends JsonResource
     {
         return [
             "id" => $this->id ?? null,
-            "image_url" => $this->image ?? null,
-            "type" => $this->type ?? null,
+            "name" => $this->name ?? null,
+            "discount" => $this->discount ?? null,
+            "quantity" => $this->quantity ?? null,
             "status" => (bool) $this->status ?? null,
+            "expiration_date" => $this->expiration_date ?? null,
         ];
     }
 }

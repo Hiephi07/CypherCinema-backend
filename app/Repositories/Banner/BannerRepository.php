@@ -15,23 +15,49 @@ class BannerRepository implements BannerRepositoryInterface {
 
     public function getAll() {
         try {
-            return Banner::where('status', 1)->get();
+            return $this->banner->all();
         } catch (Exception $e) {
             throw new Exception('Lỗi tìm nạp tất cả banner: ' . $e->getMessage());
         }
     } 
 
+    public function create($data)
+    {
+        try {
+            return $this->banner->create($data);
+        } catch (Exception $e) {
+            throw new Exception('Tạo mới không thành công: ' . $e->getMessage());
+        }
+    }
+
     public function getByType($type)
     {
         try {
             if($type == 'main') 
-                return Banner::where([['status', 1], ['type', 'main']])->get();
+                return $this->banner->where([['status', 1], ['type', 'main']])->get();
             else if($type == 'sub') 
-                return Banner::where([['status', 1], ['type', 'sub']])->get();
+                return $this->banner->where([['status', 1], ['type', 'sub']])->get();
             else 
                 throw new Exception();
         } catch (Exception $e) {
             throw new Exception('Không tìm thấy banner theo type: ' . $e->getMessage());
+        }
+    }
+
+    public function getBannerById($id) {
+        try {
+            return $this->banner->findOrFail($id);
+        } catch (Exception $e) {
+            throw new Exception('Không tìm thấy banner: ' . $e->getMessage());
+        }
+    }
+
+    public function delete($id) {
+        try {
+            $banner = $this->banner->findOrFail($id);
+            return $banner->delete();
+        } catch (Exception $e) {
+            throw new Exception('Không tìm thấy banner: ' . $e->getMessage());
         }
     }
 }

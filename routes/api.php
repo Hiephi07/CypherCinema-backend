@@ -68,6 +68,9 @@ Route::get('/movies/{id}', [MovieController::class, 'detailMovie']);
 
 // Banner
 Route::get('/banners', [BannerController::class, 'getBanner']);
+Route::get('/banners/{id}', [BannerController::class, 'detailBanner']);
+Route::post('/banners', [BannerController::class, 'createBanner']);
+Route::delete('/banners/{id}', [BannerController::class, 'deleteBanner']);
 
 // Event
 Route::get('/events', [EventController::class, 'listEvent']);
@@ -84,7 +87,12 @@ Route::get('/book-tickets/movies/{id}/showtimes', [ShowtimeController::class, 'g
 Route::get('/book-tickets/movies/{movieID}/showtimes/{showtimeID}/seats', [SeatController::class, 'seats']);
 
 Route::get('/payment-methods', [PaymentMethodController::class, 'getAll']);
-Route::post('/vouchers', [VoucherController::class, 'applyVoucher']);
+// Route::post('/vouchers', [VoucherController::class, 'applyVoucher']);
 
+// Vourchers
+Route::get('/vouchers', [VoucherController::class, 'listVoucher']);
+Route::post('/vouchers', [VoucherController::class, 'createVoucher']);
+Route::get('/vouchers/{id}', [VoucherController::class, 'detailVoucher']);
+Route::delete('/vouchers/{id}', [VoucherController::class, 'deleteVoucher']);
 
 
