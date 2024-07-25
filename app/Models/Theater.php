@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Theater extends Model
+{
+    use HasFactory;
+
+    protected $fillable = ['name', 'image', 'content'];
+
+    public function rooms() {
+        return $this->hasMany(Room::class);
+    }
+
+    public function cinemaCity () {
+        return $this->belongsTo(CinemaCity::class);
+    }
+}

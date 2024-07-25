@@ -1,0 +1,56 @@
+<?php 
+
+namespace App\Services\Banner;
+
+use App\Repositories\Banner\BannerRepositoryInterface;
+use Exception;
+
+class BannerService {
+
+    protected $bannerRepository;
+
+    public function __construct(BannerRepositoryInterface $bannerRepository)
+    {
+        $this->bannerRepository = $bannerRepository;
+    }
+
+    public function listBanner() {
+        try {
+            return $this->bannerRepository->getAll();
+        } catch (Exception $e) {
+            throw new Exception('Lỗi khi lấy danh sách banner: ' . $e->getMessage());
+        }
+    }
+
+    public function createBanner($data) {
+        try {
+            return $this->bannerRepository->create($data);
+        } catch (Exception $e) {
+            throw new Exception('Lỗi khi tạo mới banner: ' . $e->getMessage());
+        }
+    }
+
+    public function getBanner($type) {
+        try {
+            return $this->bannerRepository->getByType($type);
+        } catch (Exception $e) {
+            throw new Exception('Lỗi khi lấy banner theo type: ' . $e->getMessage());
+        }
+    }
+
+    public function detailBanner($id) {
+        try {
+            return $this->bannerRepository->getBannerById($id);
+        } catch (Exception $e) {
+            throw new Exception('Lỗi khi lấy banner theo id: ' . $e->getMessage());
+        }
+    }
+
+    public function deleteBanner($id) {
+        try {
+            return $this->bannerRepository->delete($id);
+        } catch (Exception $e) {
+            throw new Exception('Lỗi khi lấy banner theo id: ' . $e->getMessage());
+        }
+    }
+}
