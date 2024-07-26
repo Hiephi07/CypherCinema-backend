@@ -51,8 +51,9 @@ class RegisterRequest extends FormRequest
 
             'phone_number' => [
                 'required',
-                'numeric',
-                'digits:10'
+                'regex:/^[0-9]+$/',
+                'min:10',
+                'max:10'
             ],
 
             'birthday' =>  'required|date|after:1900-01-01|before:today|date_format:Y-m-d',
@@ -84,8 +85,9 @@ class RegisterRequest extends FormRequest
             'fullname.regex'    => 'Họ và tên chỉ được phép bao gồm chữ.',
 
             'phone_number.required' => 'Số điện thoại không được bỏ trống.',
-            'phone_number.numeric'  => 'Số điện thoại chỉ bao gồm chữ số.',
-            'phone_number.digits'   => 'Số điện thoại phải bao gồm 10 chữ số.',
+            'phone_number.regex'    => 'Số điện thoại chỉ bao gồm chữ số.',
+            'phone_number.min'      => 'Số điện thoại phải bao gồm 10 chữ số.',
+            'phone_number.max'      => 'Số điện thoại phải bao gồm 10 chữ số.',
 
             'birthday.required'    => 'Ngày sinh không được bỏ trống.',
             'birthday.date'        => 'Ngày sinh sai định dạng.',

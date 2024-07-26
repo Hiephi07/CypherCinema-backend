@@ -17,7 +17,12 @@ class TheaterResource extends JsonResource
         return [
             'id' => $this->id ?? null,
             'name' => $this->name ?? null,
-            'image' => $this->image ?? null,
+            'image' => $this->image ? url('public/storage/theaters/'. $this->image) : null,
+            'address' => $this->address ?? null,
+            'content' => $this->content ?? null,
+            'city' => $this->city->name ?? null,
+            'phone' => $this->phone ?? null,
+            'email' => $this->email ?? null,
         ];
     }
 }

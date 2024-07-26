@@ -2,8 +2,10 @@
 
 namespace App\Services\Banner;
 
+use App\Helpers\ImageHelper;
 use App\Repositories\Banner\BannerRepositoryInterface;
 use Exception;
+use Illuminate\Support\Facades\Storage;
 
 class BannerService {
 
@@ -24,7 +26,17 @@ class BannerService {
 
     public function createBanner($data) {
         try {
-            return $this->bannerRepository->create($data);
+            $file = $data['image'];
+            $fileName = ImageHelper::generateName($file);
+            $data['image'] = $fileName;
+
+            $banner = $this->bannerRepository->create($data);
+
+            if($banner) {
+                ImageHelper::uploadImage($file, $fileName, 'banners');
+            }
+
+            return $banner;
         } catch (Exception $e) {
             throw new Exception('Lỗi khi tạo mới banner: ' . $e->getMessage());
         }
@@ -48,9 +60,16 @@ class BannerService {
 
     public function deleteBanner($id) {
         try {
-            return $this->bannerRepository->delete($id);
+            $banner = $this->bannerRepository->getBannerById($id);
+
+            $success = $this->bannerRepository->delete($id);
+
+            if ($success) {
+                ImageHelper::removeImage($banner->image, 'banners');
+            }
+            return $success;
         } catch (Exception $e) {
-            throw new Exception('Lỗi khi lấy banner theo id: ' . $e->getMessage());
+            throw new Exception('Lỗi khi xóa banner theo id: ' . $e->getMessage());
         }
     }
 }

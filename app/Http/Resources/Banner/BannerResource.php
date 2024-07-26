@@ -16,7 +16,7 @@ class BannerResource extends JsonResource
     {
         return [
             "id" => $this->id ?? null,
-            "image_url" => $this->image ?? null,
+            "image" => $this->image ? url('public/storage/banners/' . $this->image) : null,
             "type" => $this->type ?? null,
             "status" => (bool) $this->status ?? null,
         ];

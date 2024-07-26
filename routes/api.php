@@ -78,6 +78,9 @@ Route::get('/events', [EventController::class, 'listEvent']);
 // Theater
 Route::get('/theaters', [TheaterController::class, 'listTheater']);
 Route::get('/theaters/{id}', [TheaterController::class, 'theaterDetail']);
+Route::post('/theaters', [TheaterController::class, 'createTheater']);
+Route::put('/theaters/{id}', [TheaterController::class, 'updateTheater']);
+Route::delete('/theaters/{id}', [TheaterController::class, 'deleteTheater']);
 
 // City
 Route::get('/cities', [CityController::class, 'listCity']);

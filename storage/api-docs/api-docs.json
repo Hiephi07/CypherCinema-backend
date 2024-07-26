@@ -117,13 +117,13 @@
                                             "example": [
                                                 {
                                                     "id": 1,
-                                                    "image_url": "https://www.bhdstar.vn/wp-content/uploads/2024/07/Banner-Web-BHD_Milk.jpg",
+                                                    "image": "https://www.bhdstar.vn/wp-content/uploads/2024/07/Banner-Web-BHD_Milk.jpg",
                                                     "type": "main",
                                                     "status": true
                                                 },
                                                 {
                                                     "id": 2,
-                                                    "image_url": "https://www.bhdstar.vn/wp-content/uploads/2024/07/Banner-Web-BHD_Milk2.jpg",
+                                                    "image": "https://www.bhdstar.vn/wp-content/uploads/2024/07/Banner-Web-BHD_Milk2.jpg",
                                                     "type": "sub",
                                                     "status": true
                                                 }
@@ -154,13 +154,13 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "file": {
+                                    "image": {
                                         "type": "string",
                                         "format": "binary",
                                         "description": "Tải ảnh banner lên server."
                                     }
                                 },
-                                "required": ["file"]
+                                "required": ["image"]
                             }
                         }
                     }
@@ -1151,22 +1151,22 @@
                                                 "data": [
                                                     {
                                                         "id": 1,
-                                                        "theaterName": "BHD STAR DISCOVERY",
+                                                        "name": "BHD STAR DISCOVERY",
                                                         "image": "https://image.com/1",
                                                         "address": "Tầng 8, TTTM Discovery – 302 Cầu Giấy, P.Dịch Vọng, Quận Cầu Giấy, Hà Nội",
                                                         "content": "CÁC QUY ĐỊNH GIÁ VÉ \n – Giá vé trẻ em áp dụng cho trẻ em có chiều cao dưới 1,3m. Yêu cầu trẻ em có mặt khi mua vé. Trẻ em dưới 0,7m sẽ được miễn phí vé khi mua cùng 01 vé người lớn đi kèm theo. Không áp dụng kèm với chương trình khuyến mãi ưu đãi về giá vé khác. \n – Giá vé thành viên U22 chỉ áp dụng cho thành viên dưới 22 tuổi khi mua vé. Không áp dụng kèm với chương trình khuyến mãi ưu đãi về giá vé khác. Mỗi thẻ thành viên U22 được áp dụng giá vé ưu đãi tối đa 02 vé/ngày. \n – Ngày lễ: 1/1, Giổ Tổ Hùng Vương 10/3 Âm Lịch, 30/4, 1/5, 02 ngày Lễ Quốc Khánh \n – Giá vé Tết Âm Lịch sẽ được áp dụng riêng. \n – Suất chiếu đặc biệt áp dụng giá vé theo khung giờ của ngày. Không áp dụng các giá vé ưu đãi dành cho U22, Privilege Voucher/Staff Voucher, Happy Day. Trong trường hợp Suất chiếu đặc biệt cùng ngày với Happy Day sẽ áp dụng giá vé của Thứ 3",
                                                         "city": "Hà Nội",
-                                                        "numberPhone": "098765432111",
+                                                        "phone": "098765432111",
                                                         "email": "bhd@gmail.com"
                                                     },
                                                     {
                                                         "id": 2,
-                                                        "theaterName": "BHD STAR PHAM HUNG",
+                                                        "name": "BHD STAR PHAM HUNG",
                                                         "image": "https://image.com/2",
                                                         "address": "Tầng 8, TTTM Discovery – 302 Cầu Giấy, P.Dịch Vọng, Quận Cầu Giấy, Hà Nội",
                                                         "content": "CÁC QUY ĐỊNH GIÁ VÉ \n – Giá vé trẻ em áp dụng cho trẻ em có chiều cao dưới 1,3m. Yêu cầu trẻ em có mặt khi mua vé. Trẻ em dưới 0,7m sẽ được miễn phí vé khi mua cùng 01 vé người lớn đi kèm theo. Không áp dụng kèm với chương trình khuyến mãi ưu đãi về giá vé khác. \n – Giá vé thành viên U22 chỉ áp dụng cho thành viên dưới 22 tuổi khi mua vé. Không áp dụng kèm với chương trình khuyến mãi ưu đãi về giá vé khác. Mỗi thẻ thành viên U22 được áp dụng giá vé ưu đãi tối đa 02 vé/ngày. \n – Ngày lễ: 1/1, Giổ Tổ Hùng Vương 10/3 Âm Lịch, 30/4, 1/5, 02 ngày Lễ Quốc Khánh \n – Giá vé Tết Âm Lịch sẽ được áp dụng riêng. \n – Suất chiếu đặc biệt áp dụng giá vé theo khung giờ của ngày. Không áp dụng các giá vé ưu đãi dành cho U22, Privilege Voucher/Staff Voucher, Happy Day. Trong trường hợp Suất chiếu đặc biệt cùng ngày với Happy Day sẽ áp dụng giá vé của Thứ 3",
                                                         "city": "Hà Nội",
-                                                        "numberPhone": "098765432111",
+                                                        "phone": "098765432111",
                                                         "email": "bhd@gmail.com"
                                                     }
                                                 ]
@@ -1192,7 +1192,7 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "theaterName": {
+                                    "name": {
                                         "type": "string",
                                         "example": "Rạp chiếu phim Homeless"
                                     },
@@ -1213,7 +1213,7 @@
                                         "type": "string",
                                         "example": "bha@mama.com"
                                     },
-                                    "phoneNumber": {
+                                    "phone": {
                                         "type": "string",
                                         "example": "0987654321234"
                                     },
@@ -1222,7 +1222,7 @@
                                         "example": "Tầng 8, TTTM Discovery – 302 Cầu Giấy, P.Dịch Vọng, Quận Cầu Giấy, Hà Nội"
                                     }
                                 },
-                                "required": ["theaterName", "city_id", "content", "image", "email", "phoneNumber", "address"]
+                                "required": ["name", "city_id", "content", "image", "email", "phone", "address"]
                             }
                         }
                     }
@@ -1243,12 +1243,12 @@
                                             "type": "object",
                                             "example": {
                                                 "id": 1,
-                                                "theaterName": "BHD STAR DISCOVERY",
+                                                "name": "BHD STAR DISCOVERY",
                                                 "image": "https://image.com/1",
                                                 "address": "Tầng 8, TTTM Discovery – 302 Cầu Giấy, P.Dịch Vọng, Quận Cầu Giấy, Hà Nội",
                                                 "content": "CÁC QUY ĐỊNH GIÁ VÉ \n – Giá vé trẻ em áp dụng cho trẻ em có chiều cao dưới 1,3m. Yêu cầu trẻ em có mặt khi mua vé. Trẻ em dưới 0,7m sẽ được miễn phí vé khi mua cùng 01 vé người lớn đi kèm theo. Không áp dụng kèm với chương trình khuyến mãi ưu đãi về giá vé khác. \n – Giá vé thành viên U22 chỉ áp dụng cho thành viên dưới 22 tuổi khi mua vé. Không áp dụng kèm với chương trình khuyến mãi ưu đãi về giá vé khác. Mỗi thẻ thành viên U22 được áp dụng giá vé ưu đãi tối đa 02 vé/ngày. \n – Ngày lễ: 1/1, Giổ Tổ Hùng Vương 10/3 Âm Lịch, 30/4, 1/5, 02 ngày Lễ Quốc Khánh \n – Giá vé Tết Âm Lịch sẽ được áp dụng riêng. \n – Suất chiếu đặc biệt áp dụng giá vé theo khung giờ của ngày. Không áp dụng các giá vé ưu đãi dành cho U22, Privilege Voucher/Staff Voucher, Happy Day. Trong trường hợp Suất chiếu đặc biệt cùng ngày với Happy Day sẽ áp dụng giá vé của Thứ 3",
                                                 "city": "Hà Nội",
-                                                "numberPhone": "098765432111",
+                                                "phone": "098765432111",
                                                 "email": "bhd@gmail.com"
                                             }
                                         }
@@ -1293,12 +1293,12 @@
                                             "type": "object",
                                             "example": {
                                                 "id": 1,
-                                                "theaterName": "BHD STAR DISCOVERY",
+                                                "name": "BHD STAR DISCOVERY",
                                                 "image": "https://image.com/1",
                                                 "address": "Tầng 8, TTTM Discovery – 302 Cầu Giấy, P.Dịch Vọng, Quận Cầu Giấy, Hà Nội",
                                                 "content": "CÁC QUY ĐỊNH GIÁ VÉ \n – Giá vé trẻ em áp dụng cho trẻ em có chiều cao dưới 1,3m. Yêu cầu trẻ em có mặt khi mua vé. Trẻ em dưới 0,7m sẽ được miễn phí vé khi mua cùng 01 vé người lớn đi kèm theo. Không áp dụng kèm với chương trình khuyến mãi ưu đãi về giá vé khác. \n – Giá vé thành viên U22 chỉ áp dụng cho thành viên dưới 22 tuổi khi mua vé. Không áp dụng kèm với chương trình khuyến mãi ưu đãi về giá vé khác. Mỗi thẻ thành viên U22 được áp dụng giá vé ưu đãi tối đa 02 vé/ngày. \n – Ngày lễ: 1/1, Giổ Tổ Hùng Vương 10/3 Âm Lịch, 30/4, 1/5, 02 ngày Lễ Quốc Khánh \n – Giá vé Tết Âm Lịch sẽ được áp dụng riêng. \n – Suất chiếu đặc biệt áp dụng giá vé theo khung giờ của ngày. Không áp dụng các giá vé ưu đãi dành cho U22, Privilege Voucher/Staff Voucher, Happy Day. Trong trường hợp Suất chiếu đặc biệt cùng ngày với Happy Day sẽ áp dụng giá vé của Thứ 3",
                                                 "city": "Hà Nội",
-                                                "numberPhone": "098765432111",
+                                                "phone": "098765432111",
                                                 "email": "bhd@gmail.com"
                                             }
                                         }
@@ -1322,7 +1322,7 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "theaterName": {
+                                    "name": {
                                         "type": "string",
                                         "example": "Rạp chiếu phim Homeless"
                                     },
@@ -1343,7 +1343,7 @@
                                         "type": "string",
                                         "example": "bha@mama.com"
                                     },
-                                    "phoneNumber": {
+                                    "phone": {
                                         "type": "string",
                                         "example": "0987654321234"
                                     },
@@ -1352,7 +1352,7 @@
                                         "example": "Tầng 8, TTTM Discovery – 302 Cầu Giấy, P.Dịch Vọng, Quận Cầu Giấy, Hà Nội"
                                     }
                                 },
-                                "required": ["theaterName", "city_id", "content", "image", "email", "phoneNumber", "address"]
+                                "required": ["name", "city_id", "content", "image", "email", "phone", "address"]
                             }
                         }
                     }
@@ -1373,12 +1373,12 @@
                                             "type": "object",
                                             "example": {
                                                 "id": 1,
-                                                "theaterName": "BHD STAR DISCOVERY",
+                                                "name": "BHD STAR DISCOVERY",
                                                 "image": "https://image.com/1",
                                                 "address": "Tầng 8, TTTM Discovery – 302 Cầu Giấy, P.Dịch Vọng, Quận Cầu Giấy, Hà Nội",
                                                 "content": "CÁC QUY ĐỊNH GIÁ VÉ \n – Giá vé trẻ em áp dụng cho trẻ em có chiều cao dưới 1,3m. Yêu cầu trẻ em có mặt khi mua vé. Trẻ em dưới 0,7m sẽ được miễn phí vé khi mua cùng 01 vé người lớn đi kèm theo. Không áp dụng kèm với chương trình khuyến mãi ưu đãi về giá vé khác. \n – Giá vé thành viên U22 chỉ áp dụng cho thành viên dưới 22 tuổi khi mua vé. Không áp dụng kèm với chương trình khuyến mãi ưu đãi về giá vé khác. Mỗi thẻ thành viên U22 được áp dụng giá vé ưu đãi tối đa 02 vé/ngày. \n – Ngày lễ: 1/1, Giổ Tổ Hùng Vương 10/3 Âm Lịch, 30/4, 1/5, 02 ngày Lễ Quốc Khánh \n – Giá vé Tết Âm Lịch sẽ được áp dụng riêng. \n – Suất chiếu đặc biệt áp dụng giá vé theo khung giờ của ngày. Không áp dụng các giá vé ưu đãi dành cho U22, Privilege Voucher/Staff Voucher, Happy Day. Trong trường hợp Suất chiếu đặc biệt cùng ngày với Happy Day sẽ áp dụng giá vé của Thứ 3",
                                                 "city": "Hà Nội",
-                                                "numberPhone": "098765432111",
+                                                "phone": "098765432111",
                                                 "email": "bhd@gmail.com"
                                             }
                                         },
