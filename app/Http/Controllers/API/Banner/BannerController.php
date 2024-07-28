@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Banner;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Banner\BannerRequest;
+use App\Http\Requests\Banner\BannerUpdateRequest;
 use App\Http\Resources\Banner\BannerResource;
 use App\Services\Banner\BannerService;
 use Exception;
@@ -18,16 +19,17 @@ class BannerController extends Controller
         $this->bannerService = $bannerService;
     }
 
-    public function getBanner(Request $req) {
+    public function getBanner(Request $req)
+    {
         $type = $req->query('type', null);
-        
+
         try {
-            if(!$type) {
+            if (!$type) {
                 $data = $this->bannerService->listBanner();
             } else {
                 $data = $this->bannerService->getBanner($type);
             }
-            
+
             return BannerResource::collection($data)->additional([
                 'status' => true,
                 'msg' => 'Lấy danh sách banner thành công'
@@ -41,17 +43,18 @@ class BannerController extends Controller
         }
     }
 
-    public function createBanner(BannerRequest $req) {
+    public function createBanner(BannerRequest $req)
+    {
         try {
-            $data = $req->except('image');
+            $data = $req->all();
             $data['image'] = $req->file('image');
             $banner = $this->bannerService->createBanner($data);
-            
+
             return (new BannerResource($banner))->additional([
                 'status' => true,
                 'msg' => 'Thêm mới banner thành công'
             ]);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             return response()->json([
                 'status' => false,
                 'data' => null,
@@ -60,9 +63,33 @@ class BannerController extends Controller
         }
     }
 
-    public function detailBanner($id) {
+    public function updateBanner(BannerUpdateRequest $req, $id)
+    {
+        try {
+            $data = $req->all();
+            if ($req->hasFile('image')) {
+                $data['image'] = $req->file('image');
+            }
+            $banner = $this->bannerService->updateBanner($data, $id);
+
+            return (new BannerResource($banner))->additional([
+                'status' => true,
+                'msg' => 'Cập nhật banner thành công'
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => false,
+                'data' => null,
+                'msg' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function detailBanner($id)
+    {
         try {
             $banner = $this->bannerService->detailBanner($id);
+
             return (new BannerResource($banner))->additional([
                 'status' => true,
                 'msg' => 'Lấy banner thành công'
@@ -76,9 +103,11 @@ class BannerController extends Controller
         }
     }
 
-    public function deleteBanner($id) {
+    public function deleteBanner($id)
+    {
         try {
             $this->bannerService->deleteBanner($id);
+            
             return response()->json([
                 'status' => true,
                 'data' => null,

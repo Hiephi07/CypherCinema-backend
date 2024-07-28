@@ -6,6 +6,7 @@ interface BannerRepositoryInterface {
     public function getAll();
     public function getBannerById($id);
     public function create($data);
+    public function update($data, $id);
     public function delete($id);
     public function getByType($type);
 }

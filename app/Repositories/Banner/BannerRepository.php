@@ -30,6 +30,16 @@ class BannerRepository implements BannerRepositoryInterface {
         }
     }
 
+    public function update($data, $id)
+    {
+        try {
+            $banner = $this->getBannerById($id);
+            return $banner->update($data);
+        } catch (Exception $e) {
+            throw new Exception('Chỉnh sửa không thành công: ' . $e->getMessage());
+        }
+    }
+
     public function getByType($type)
     {
         try {

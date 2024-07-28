@@ -42,6 +42,31 @@ class BannerService {
         }
     }
 
+    public function updateBanner($data, $id) {
+        try {
+            $banner = $this->bannerRepository->getBannerById($id);
+    
+            if (isset($data['image'])) {
+                $file = $data['image'];
+                $fileName = ImageHelper::generateName($file);
+                $data['image'] = $fileName;
+            } else {
+                $data['image'] = $banner->image;
+            }
+            $update = $this->bannerRepository->update($data, $id);
+
+            if ($update && isset($file)) {
+                ImageHelper::uploadImage($file, $fileName, 'banners');
+                ImageHelper::removeImage($banner->image, 'banners');
+            }
+
+            $updatedBanner = $this->bannerRepository->getBannerById($id);
+            return $updatedBanner;
+        } catch (Exception $e) {
+            throw new Exception('Lỗi khi cập nhật banner: ' . $e->getMessage());
+        }
+    }
+
     public function getBanner($type) {
         try {
             return $this->bannerRepository->getByType($type);

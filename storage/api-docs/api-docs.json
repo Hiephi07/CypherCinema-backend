@@ -158,9 +158,17 @@
                                         "type": "string",
                                         "format": "binary",
                                         "description": "Tải ảnh banner lên server."
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "main"
+                                    },
+                                    "status": {
+                                        "type": "integer",
+                                        "example": 1
                                     }
                                 },
-                                "required": ["image"]
+                                "required": ["image", "type", "status"]
                             }
                         }
                     }
@@ -324,6 +332,98 @@
                     },
                     "404": {
                         "description": "Voucher not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Banners"
+                ],
+                "summary": "Edit a banner",
+                "operationId": "editBanner",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "image": {
+                                        "type": "string",
+                                        "format": "binary",
+                                        "description": "Tải ảnh banner lên server."
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "main"
+                                    },
+                                    "status": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "required": ["type", "status"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Chỉnh sửa banner thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties":{
+                                                "image": {
+                                                    "type": "string",
+                                                    "example": "https://image.com/1"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "main"
+                                                },
+                                                "status": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Không tìm thấy banner",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "Không tìm thấy ID của banner."
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             },
