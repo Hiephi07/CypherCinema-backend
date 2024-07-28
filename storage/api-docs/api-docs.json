@@ -903,7 +903,11 @@
                                         "type": "string",
                                         "example": "Tiêu đề mới"
                                     },
-                                    "poster": {
+                                    "title_sub": {
+                                        "type": "string",
+                                        "example": "Tiêu đề phụ"
+                                    },
+                                    "image": {
                                         "type": "string",
                                         "format": "binary",
                                         "description": "Poster cho bài viết sự kiện"
@@ -919,9 +923,13 @@
                                     "end_day": {
                                         "type": "string",
                                         "example": "31-07-2024"
+                                    },
+                                    "status": {
+                                        "type": "integer",
+                                        "example": 1
                                     }
                                 },
-                                "required": ["title", "poster", "content", "start_day", "end_day"]
+                                "required": ["title", "title_sub", "image", "content", "start_day", "end_day", "status"]
                             }
                         }
                     }
@@ -945,7 +953,7 @@
                                                     "type": "string",
                                                     "example": "Tiêu đề mới"
                                                 },
-                                                "poster": {
+                                                "image": {
                                                     "type": "string",
                                                     "example": "https://image.com/1"
                                                 },
@@ -985,11 +993,11 @@
                                                         "example": "Tiêu đề là bắt  buộc."
                                                     }
                                                 },
-                                                "poster": {
+                                                "image": {
                                                     "type": "array",
                                                     "items": {
                                                         "type": "string",
-                                                        "example": "Poster là bắt buộc."
+                                                        "example": "image là bắt buộc."
                                                     }
                                                 },
                                                 "content": {

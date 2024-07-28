@@ -75,6 +75,10 @@ Route::delete('/banners/{id}', [BannerController::class, 'deleteBanner']);
 
 // Event
 Route::get('/events', [EventController::class, 'listEvent']);
+Route::get('/events/{id}', [EventController::class, 'detailEvent']);
+Route::post('/events', [EventController::class, 'createEvent']);
+Route::put('/events/{id}', [EventController::class, 'updateEvent']);
+Route::delete('/events/{id}', [EventController::class, 'deleteEvent']);
 
 // Theater
 Route::get('/theaters', [TheaterController::class, 'listTheater']);

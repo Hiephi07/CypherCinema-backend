@@ -20,6 +20,8 @@ class EventResource extends JsonResource
             "title_sub" => $this->title_sub ?? null,
             "image" => $this->image ?? null,
             "content" => $this->content ?? null,
+            "start_day" => $this->start_day ?? null,
+            "end_day" => $this->end_day ?? null,
             "status" => $this->status ?? null,
         ];
     }
