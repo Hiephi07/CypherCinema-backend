@@ -32,13 +32,9 @@ class VoucherService
 
     public function updateVoucher($data, $id) {
         try {
-            $updated = $this->voucherRepository->update($data, $id);
+            $this->voucherRepository->update($data, $id);
+            return $this->voucherRepository->getVoucherById($id);
 
-            if($updated) {
-                $voucher = $this->voucherRepository->getVoucherById($id);
-            }
-            
-            return $voucher;
         } catch (Exception $e) {
             throw new Exception('Lỗi khi cập nhật voucher ' . $e->getMessage());
         }

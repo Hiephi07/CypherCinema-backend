@@ -42,7 +42,12 @@ class TheaterRepository implements TheaterRepositoryInterface {
 
     public function update($data, $id)
     {
-        
+        try {
+            $theater = $this->findById($id);
+            return $theater->update($data);
+        } catch (Exception $e) {
+            throw new Exception('Lỗi không thể cập nhật theater: ' . $e->getMessage());
+        }
     }
 
     public function delete($id)

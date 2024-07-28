@@ -53,9 +53,9 @@ class BannerService {
             } else {
                 $data['image'] = $banner->image;
             }
-            $update = $this->bannerRepository->update($data, $id);
+            $updated = $this->bannerRepository->update($data, $id);
 
-            if ($update && isset($file)) {
+            if ($updated && isset($file)) {
                 ImageHelper::uploadImage($file, $fileName, 'banners');
                 ImageHelper::removeImage($banner->image, 'banners');
             }

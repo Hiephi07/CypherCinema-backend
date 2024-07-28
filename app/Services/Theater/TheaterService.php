@@ -47,31 +47,26 @@ class TheaterService {
         }
     }
 
-    public function updateTheater($id, $data) {
+    public function updateTheater($data, $id) {
         try {
             $theater = $this->theaterRepository->findById($id);
-
-            if (isset($data['image']) && $data['image'] instanceof \Illuminate\Http\UploadedFile) {
-                // Xóa ảnh cũ khỏi storage
-                $oldImagePath = 'public/theaters/' . $theater->image;
-                // if (Storage::exists($oldImagePath)) {
-                //     Storage::delete($oldImagePath);
-                // }
-
-                // Xử lý và lưu ảnh mới
+    
+            if (isset($data['image'])) {
                 $file = $data['image'];
                 $fileName = ImageHelper::generateName($file);
                 $data['image'] = $fileName;
-                ImageHelper::uploadImage($file, $fileName, 'theaters');
             } else {
-                // Nếu không có ảnh mới, giữ lại ảnh cũ
-                unset($data['image']);
+                $data['image'] = $theater->image;
+            }
+            $updated = $this->theaterRepository->update($data, $id);
+
+            if ($updated && isset($file)) {
+                ImageHelper::uploadImage($file, $fileName, 'theaters');
+                ImageHelper::removeImage($theater->image, 'theaters');
             }
 
-            // Cập nhật dữ liệu theater
-            $theater = $this->theaterRepository->update($id, $data);
-
-            return $theater;
+            $updatedTheater = $this->theaterRepository->findById($id);
+            return $updatedTheater;
         } catch (Exception $e) {
             throw new Exception('Lỗi khi cập nhật theater: ' . $e->getMessage());
         }
