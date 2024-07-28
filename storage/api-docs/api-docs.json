@@ -535,6 +535,18 @@
                                     "discount": {
                                         "type": "integer",
                                         "example": 10
+                                    },
+                                    "quantity": {
+                                        "type": "integer",
+                                        "example": 100
+                                    },
+                                    "status": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "expiration_date": {
+                                        "type": "date",
+                                        "example": "2024-08-30"
                                     }
                                 },
                                 "required": ["name", "discount"]
@@ -561,6 +573,18 @@
                                         "discount": {
                                             "type": "integer",
                                             "example": 10
+                                        },
+                                        "quantity": {
+                                            "type": "integer",
+                                            "example": 100
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "expiration_date": {
+                                            "type": "date",
+                                            "example": "2024-08-30"
                                         }
                                     }
                                 }
@@ -614,6 +638,121 @@
                     },
                     "404": {
                         "description": "Voucher not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Vouchers"
+                ],
+                "summary": "Edit a voucher",
+                "operationId": "editVoucher",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "12345"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Discount Voucher"
+                                        },
+                                        "discount": {
+                                            "type": "integer",
+                                            "example": 10
+                                        },
+                                        "quantity": {
+                                            "type": "integer",
+                                            "example": 100
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "expiration_date": {
+                                            "type": "date",
+                                            "example": "2024-08-30"
+                                        }
+                                    },
+                                    "required": ["name", "discount", "quantity", "status", "expiration_date"]
+                                }
+                            }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Chỉnh sửa voucher thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                                "status": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "data": {
+                                                    "type": "object",
+                                                    "properties":{
+                                                        "id": {
+                                                    "type": "string",
+                                                    "example": "12345"
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Discount Voucher"
+                                                },
+                                                "discount": {
+                                                    "type": "integer",
+                                                    "example": 10
+                                                },
+                                                "quantity": {
+                                                    "type": "integer",
+                                                    "example": 100
+                                                },
+                                                "status": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "expiration_date": {
+                                                    "type": "date",
+                                                    "example": "2024-08-30"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Không tìm thấy voucher",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "Không tìm thấy ID của voucher."
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             },

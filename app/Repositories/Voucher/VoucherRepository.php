@@ -33,6 +33,15 @@ class VoucherRepository implements VoucherRepositoryInterface
         }
     }
 
+    public function update($data, $id) {
+        try {
+            $voucher = $this->getVoucherById($id);
+            return $voucher->update($data);
+        } catch (Exception $e) {
+            throw new Exception('Lỗi khi cập nhật voucher: ' . $e->getMessage());
+        }
+    }
+
     public function getVoucherById($id)
     {
         try {

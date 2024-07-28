@@ -97,6 +97,7 @@ Route::get('/payment-methods', [PaymentMethodController::class, 'getAll']);
 Route::get('/vouchers', [VoucherController::class, 'listVoucher']);
 Route::post('/vouchers', [VoucherController::class, 'createVoucher']);
 Route::get('/vouchers/{id}', [VoucherController::class, 'detailVoucher']);
+Route::put('/vouchers/{id}', [VoucherController::class, 'updateVoucher']);
 Route::delete('/vouchers/{id}', [VoucherController::class, 'deleteVoucher']);
 
 

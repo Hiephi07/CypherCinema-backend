@@ -30,6 +30,20 @@ class VoucherService
         }
     }
 
+    public function updateVoucher($data, $id) {
+        try {
+            $updated = $this->voucherRepository->update($data, $id);
+
+            if($updated) {
+                $voucher = $this->voucherRepository->getVoucherById($id);
+            }
+            
+            return $voucher;
+        } catch (Exception $e) {
+            throw new Exception('Lỗi khi cập nhật voucher ' . $e->getMessage());
+        }
+    }
+
     public function detailVoucher($id) {
         try {
             return $this->voucherRepository->getVoucherById($id);

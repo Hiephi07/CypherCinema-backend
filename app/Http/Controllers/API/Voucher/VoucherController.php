@@ -52,6 +52,23 @@ class VoucherController extends Controller
         }
     }
 
+    public function updateVoucher(VoucherRequest $req, $id) {
+        try {
+            $voucher = $this->voucherService->updateVoucher($req->all(), $id);
+            
+            return (new VoucherResource($voucher))->additional([
+                'status' => true,
+                'msg' => 'Cập nhật voucher thành công'
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => false,
+                'data' => null,
+                'msg' => $e->getMessage()
+            ], 500);
+        }
+    }
+
     public function detailVoucher($id) {
         try {
             $voucher = $this->voucherService->detailVoucher($id);

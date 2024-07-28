@@ -6,6 +6,7 @@ interface VoucherRepositoryInterface
 {
     public function getAll();
     public function create($data);
+    public function update($data, $id);
     public function getVoucherById($id);
     public function findValidVoucherByCode(string $code);
     public function delete($id);
